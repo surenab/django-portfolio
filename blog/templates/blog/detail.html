@@ -1,0 +1,51 @@
+{% extends 'blog/base.html' %} 
+{% block content %}
+<main>
+  <div class="container">
+    <div class="row mainmargin">
+      <div class="single-post">
+        <h2 class="underscore">
+          {{blog.title}}
+        </h2>
+        <div class="post-meta">
+          <span><i class="far fa-calendar"></i> {{blog.date}}</span>
+        </div>
+        <img src="{{blog.image.url}}" alt="{{blog.image.name}}" />
+        {{blog.description|safe}}
+        <div class="share">
+          <a
+            class="main-button"
+            href="https://www.facebook.com/sharer.php?u={{ request.get_host }}{% url 'blog:detail' blog.id %}"
+            target="_blank"
+            ><i class="fab fa-facebook-f"></i> FACEBOOK</a
+          >
+          <a
+            class="main-button"
+            href="https://plus.google.com/share?url={{ request.get_host }}{% url 'blog:detail' blog.id %}"
+            target="_blank"
+          >
+            <i class="fab fa-google-plus-g"></i> GOOGLE+</a
+          >
+          <a
+            class="main-button"
+            href="https://twitter.com/intent/tweet?url={{ request.get_host }}{% url 'blog:detail' blog.id %}"
+            target="_blank"
+            ><i class="fab fa-twitter"></i> TWITTER</a
+          >
+          <a
+            class="main-button"
+            href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.get_host }}{% url 'blog:detail' blog.id %}"
+            target="_blank"
+            ><i class="fab fa-linkedin-in"></i> LINKEDIN</a
+          >
+        </div>
+        <div class="navigation">
+          <a class="prew"><i class="fas fa-chevron-left"></i> PREVIOUS</a>
+          <a class="next">NEXT <i class="fas fa-chevron-right"></i></a>
+        </div>
+        <div class="line"></div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
