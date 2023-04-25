@@ -8,7 +8,7 @@ from django.conf import settings
 # Create your views here.
 def home(request):
     projects = Project.objects.all()
-    testimonials = Testimonial.objects.all().values("title", "name", "text", "image")
+    testimonials = Testimonial.objects.all()
     skills = Skill.objects.all().values("name", "value")
     skills_length = len(skills)
     services = Service.objects.all().values("title", "text", "svg_path", "icon_box", "aos_delay", "icon_name")

@@ -1,12 +1,3 @@
-"""
-This is a django-split-settings main file.
-For more information read this:
-https://github.com/sobolevn/django-split-settings
-https://sobolevn.me/2017/04/managing-djangos-settings
-To change settings file:
-`DJANGO_ENV=production python manage.py runserver`
-"""
-
 from os import environ
 
 import django_stubs_ext
@@ -17,7 +8,6 @@ from password_generator.settings.components import config
 django_stubs_ext.monkeypatch()
 
 # Managing environment via `DJANGO_ENV` variable:
-# environ.setdefault('DJANGO_ENV', 'development')
 _ENV = config('DJANGO_ENV')
 
 _base_settings = (
