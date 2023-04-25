@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
-  DJANGO_ENV: Releasedevelopment
+  DJANGO_ENV: development
   DJANGO_SECRET_KEY: fnjgfnklfnklbfnmklbfmnlk
   DOMAIN_NAME: suren-abrahamyan.com
   
