@@ -24,6 +24,7 @@ urlpatterns = [
     path('password-generator/', include("generator.urls")),
     path('', include("portfolio.urls")),
     path('blog/', include("blog.urls")),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
