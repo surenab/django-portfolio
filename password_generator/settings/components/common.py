@@ -25,6 +25,7 @@ INSTALLED_APPS: Tuple[str, ...] = (
     "portfolio",
     "blog",
     "corsheaders",
+    "solo",
 
     # Default django apps:
     'django.contrib.auth',
@@ -219,3 +220,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # CORS
 CORS_ALLOW_ALL_ORIGINS = True
+
+# ALLOW IFRAM USAGE
+X_FRAME_OPTIONS = 'SAMEORIGIN'

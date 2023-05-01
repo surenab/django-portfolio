@@ -1,0 +1,54 @@
+{% extends 'portfolio/base.html' %} 
+{% load static %}
+{% block content %}
+
+  <main id="main">
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-7">
+            <div class="portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+                {% for i in project.projectimage_set.all %}
+                  <div class="swiper-slide">
+                    <img src="{{i.image.url}}" alt="{{i.image.name}}" class="swiper-slide-image">
+                  </div>
+                {% endfor %}
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="portfolio-info">
+              <h3>Project information</h3>
+              <ul>
+                <li><strong>Category</strong>: {{project.get_category_display}}</li>
+                <li><strong>Client</strong>: {{project.client}}</li>
+                <li><strong>Project date</strong>: {{project.release_date}}</li>
+                <li><strong>Project URL</strong>: <a href="{{project.url}}">{{project.url}}</a></li>
+                <li><strong>Tech Stack</strong>: {{project.tech_stack}}</li>
+              </ul>
+            </div>
+            <div class="portfolio-description">
+              <h2>{{project.title}}</h2>
+              <p>
+                {{project.description}}
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  {% endblock %}

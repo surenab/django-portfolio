@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from .models import Project, Testimonial, Skill, Service
+from django.shortcuts import render, get_object_or_404
+from .models import Project, Testimonial, Skill, Service, Profile
 from .forms import ContactForm
 from django.http import HttpResponse
 from django.core.mail import EmailMessage
@@ -7,16 +7,14 @@ from django.conf import settings
 
 # Create your views here.
 def home(request):
-    projects = Project.objects.all()
-    testimonials = Testimonial.objects.all()
-    skills = Skill.objects.all().values("name", "value")
-    skills_length = len(skills)
-    services = Service.objects.all().values("title", "text", "svg_path", "icon_box", "aos_delay", "icon_name")
-    return render(request, "portfolio/home.html", 
-                  {"projects": projects, "testimonials": testimonials, "skills_part1": skills[:skills_length//2], "skills_part2": skills[skills_length//2:], "services": services})
+    profile = Profile.objects.get()
+    return render(request, "portfolio/home.html", {"profile" : profile})
+
+def project_detail(request, project_id):
+    project = get_object_or_404(Project, pk=project_id)
+    return render(request, "portfolio/project_detail.html", {"project": project})
 
 def custom_page_not_found_view(request, exception):
-    print("I am here")
     return render(request, "errors/404.html", {})
 
 def custom_error_view(request, exception=None):

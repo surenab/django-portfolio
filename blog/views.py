@@ -1,11 +1,10 @@
 from django.shortcuts import render, get_object_or_404
-import os
-from django.http import FileResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 from django.shortcuts import render
 from .models import Blog
+from .forms import CommentForm
 
 # Create your views here.
 def all_blogs(request):
@@ -24,10 +23,21 @@ def all_blogs(request):
     return render(request, "blog/all_blogs.html", {"blogs": blogs, "popular_blogs": popular_blogs})
 
 
-def show_pdf(request):
-    filepath = os.path.join('static', 'Python-week1.pdf')
-    return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
-
 def detail(request, blog_id):
     blog = get_object_or_404(Blog, pk=blog_id)
-    return render(request, "blog/detail.html", {"blog": blog, "request": request})
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            # Create Comment object but don't save to database yet
+            new_comment = comment_form.save(commit=False)
+            # Assign the current post to the comment
+            new_comment.blog = blog
+            # Save the comment to the database
+            new_comment.save()
+    comments = blog.comments.filter(active=True)
+    return render(request, "blog/detail.html", {"blog": blog, 
+                                                "request": request,
+                                                'comments': comments,
+                                                'comment_form': CommentForm()})
+
+

@@ -738,6 +738,10 @@ section {
 
 .portfolio-details .portfolio-details-slider img {
   width: 100%;
+  max-width: 300vh;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .portfolio-details .portfolio-details-slider .swiper-pagination {
@@ -1205,5 +1209,9 @@ section {
 
 #footer .credits {
   font-size: 13px;
+}
+
+.swiper-slide-image {
+  /* max-height: 100vh; */
 }
 
